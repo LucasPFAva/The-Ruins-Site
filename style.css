@@ -1,0 +1,28 @@
+@import url("https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;1,600&display=swap");
+
+*{
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: 'lora', sans-serif;
+}
+
+nav {
+    display: flex;
+    justify-content: flex-end;
+    box-shadow: 0 7px 8px lightgrey;
+    z-index: 1;
+    padding-top: 2em;
+}
+
+nav a {
+    color: darkslategrey;
+    text-decoration: none;
+    font-size: 1.5em;
+}
+
+li {
+    display: inline-block;
+}
