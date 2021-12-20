@@ -1,0 +1,125 @@
+@import url("https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;1,600&display=swap");
+
+*{
+    /* padding: 0;
+    margin: 0; */
+    box-sizing: border-box;
+}
+
+body {
+    font-size: 1em;
+    font-family: 'lora', sans-serif;
+}
+
+.wrapper {
+    margin: 0 auto;
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0px 1px 5px 3px rgba(0,0,0,0.15);
+    position: relative;
+    width: 450px;
+}
+
+input {
+    width: 100%;
+    border: none;
+    height: 2em;
+    border-radius: 5px;
+    padding: 0px 40px 0px 10px;
+    font-size: 1em;
+    box-shadow: 0px 1px 4px rgba(0,0,0,0.1);
+}
+
+input:focus {
+    outline: none;
+}
+
+button {
+    position: absolute;
+    border: none;
+    background-color: none;
+    right: 0;
+    height: 2rem;
+    width: 3rem;
+}
+
+button i {
+    width: 100%;
+    color: #6d7b98;
+    font-size: 2em;
+}
+
+button:focus {
+    outline: none;
+}
+
+#results {
+    padding: 0px;
+}
+
+#results {margin: 0; padding: 0;}
+#results li {
+    list-style-type: none;
+    border-radius: 3px;
+    opacity: 0;
+    display: none;
+    padding: 8px 12px;
+    transition: all .5s linear;
+}
+
+.show #results li {
+    opacity: 1;
+    display: block;
+}
+
+.show #results {
+    padding: 10px;
+}
+
+#results li:hover {
+    background-color: #ececec;
+}
+
+nav {
+    display: flex;
+    justify-content: flex-end;
+    box-shadow: 0 7px 8px lightgrey;
+    z-index: 1;
+}
+
+nav a {
+    color: darkslategrey;
+    text-decoration: none;
+}
+
+#menu {
+    list-style-type: none;
+}
+
+li {
+    display: inline-block;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+}
+
+article {
+    max-width: 1000px;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+}
+
+h1 {
+    text-align: center;
+}
+
+/* clears the 'X' in input[type="search"] from Chrome */
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration { -webkit-appearance: none; }
