@@ -13,3 +13,4 @@
 <p>* An In-Game chat. For chatting with friends and mates (There will exist an optional profanity filter).</p>
 <p>* Ultrawide and super ultrawide aspect ratios(21:9, 32:9) will be natively supported.</p>
 <p>* The games visuals will take inspartion from pixelart.</p>
+<p>* Full controller support. The menus and gameplay will be completely usable without the interference of a keyboard and mouse.</p>
