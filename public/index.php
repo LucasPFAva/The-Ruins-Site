@@ -74,7 +74,7 @@
                 <?php if ($username != ""): ?>
                     <div class="username"><? htmlspecialchars($_SESSION['username'] ?></div>
                 <?php endif; ?>
-                <div class="user-icon"><a href="<?=base()?>account.php"><span class="fas fa-user"></span></a></div>
+                <div class="user-icon"><a href="<?=base()?>account"><span class="fas fa-user"></span></a></div>
                 <script>
                     $(".menu-icon").click(function (e) { 
                         e.preventDefault();
