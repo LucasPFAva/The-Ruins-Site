@@ -1,8 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;1,600&display=swap");
 
 *{
-    /* padding: 0;
-    margin: 0; */
+    padding: 0;
+    margin: 0;
+    outline: none;
     box-sizing: border-box;
 }
 
@@ -10,8 +11,144 @@ body {
     font-size: 1em;
     font-family: 'lora', sans-serif;
 }
+nav {
+    background: darkred;
+}
+nav form {
+    display: flex;
+    height: 40px;
+    border-radius: 2px;
+    padding: 2px;
+    background: red;
+    min-width: 18%!important;
+    border: 1px solid rgba(155, 155, 155, 0.2);
+    z-index: 1;
+}
 
-.wrapper {
+nav form.active {
+    display: flex;
+}
+
+nav form .search-data {
+    height: 100%;
+    width: 100%;
+    padding: 0 10px;
+    color: white;
+    background: none;
+    border: none;
+    font-weight: 500;
+    font-size: 17px;
+}
+
+nav form button {
+    padding: 0 15px;
+    background: orangered;
+    border: none;
+    cursor: pointer;
+    font-size: 17px;
+    color: white;
+    border-radius: 2px;
+}
+
+nav div#mobile {
+    display: flex;
+    justify-content: space-between;
+    width: 7em;
+}
+
+section.mobile-header {
+    display: none;
+    justify-content: space-between;
+    width: 12em;
+}
+
+img {
+    width: 100%;
+}
+
+.hover-ani {
+    animation: hovering 2s ease-in-out infinite;
+}
+@keyframes hovering {
+    0% {
+        transform: translatey(-1em);
+    }
+    100% {
+        transform: translate(1em);
+    }
+}
+
+#header {
+    text-align: center;
+}
+
+nav .menu-icon,
+nav .search-icon,
+nav .user-icon,
+.cancel-icon {
+    color: white;
+    text-align: center;
+    font-size: 2em;
+    cursor: pointer;
+    display: none;
+}
+nav .menu-icon span,
+nav .search-icon,
+nav .user-icon {
+    display: none;
+}
+@media (max-width: 1140px) {
+    nav {
+        padding: 0 50px;
+    }
+    section.mobile-header {
+        display: flex;
+    }
+    nav #menu {
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        width: 16em;
+        height: 100%;
+        background: orangered;
+        display: flex;
+        flex-direction: column;
+        padding: 10px 50px 0 50px;
+        transition: all 0.4s;
+        text-align: center;
+        overflow: auto;
+    }
+    nav #menu li {
+        line-height: 40px;
+        margin: 30px 0;
+        width: 100%;
+    }
+    nav #menu li a {
+        font-size: 20px;
+    }
+    nav form {
+        display: none;
+    }
+    nav .menu-icon {
+        display: block;
+    }
+    nav .search-icon,
+    nav .menu-icon span,
+    nav .user-icon,
+    .cancel-icon {
+        display: block;
+    }
+}
+
+@media (max-width: 603px) {
+    nav form {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+}
+
+/* .wrapper {
     margin: 0 auto;
     background-color: #ffffff;
     border-radius: 5px;
@@ -51,10 +188,15 @@ button i {
 
 button:focus {
     outline: none;
-}
+} */
 
 #results {
     padding: 0px;
+    position: absolute;
+    top: 3em;
+    width: 20em;
+    background: darkred;
+    border-radius: 2px;
 }
 
 #results {margin: 0; padding: 0;}
@@ -67,33 +209,74 @@ button:focus {
     transition: all .5s linear;
 }
 
-.show #results li {
+.show#results li {
     opacity: 1;
     display: block;
 }
 
-.show #results {
+.show#results {
     padding: 10px;
 }
 
 #results li:hover {
-    background-color: #ececec;
+    background-color: darkred;
 }
 
 nav {
     display: flex;
-    justify-content: flex-end;
     box-shadow: 0 7px 8px lightgrey;
+    justify-content: space-between;
+    flex-wrap: wrap;
     z-index: 1;
+    height: 3em;
+    padding: 0 2em;
 }
 
 nav a {
-    color: darkslategrey;
+    color: white;
     text-decoration: none;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+nav a:hover {
+    color: orangered;
+}
+
+nav #icon {
+    color: darkslategrey;
+    font-size: 2em;
+    font-weight: 600;
+    letter-spacing: -1px;
 }
 
 #menu {
     list-style-type: none;
+    display: flex;
+    flex: 1;
+    padding: 0 0 0 40px;
+    left: -16em;
+}
+
+#menu.active {
+    left: 0;
+}
+
+#menu li {
+    padding: 0 15px;
+}
+
+#account-form.active {
+    display: flex;
+}
+
+#account-form {
+    display: none;
+    flex-direction: column;
+    background: red;
+    width: 20em;
+    align-items: center;
+    z-index: 1;
 }
 
 li {
@@ -105,17 +288,17 @@ main {
     justify-content: center;
 }
 
-article {
-    max-width: 1000px;
-}
-
 footer {
     display: flex;
     justify-content: center;
 }
 
-h1 {
-    text-align: center;
+article {
+    max-width: 725px;
+}
+
+article > * {
+    margin-top: 2rem;
 }
 
 /* clears the 'X' in input[type="search"] from Chrome */

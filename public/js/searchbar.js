@@ -8,7 +8,7 @@ let searchable = [
     {name: "Bard", href: "character/bard"}
 ];
 
-const searchWrapper = document.querySelector('.wrapper');
+const searchWrapper = document.querySelector('#results');
 
 document.getElementById('search').addEventListener('keyup', (e)=>{
     let results = [];
@@ -21,7 +21,7 @@ document.getElementById('search').addEventListener('keyup', (e)=>{
 
     if (results.length) {
         let content = results.map((item)=>{
-            return `<li><a href="/${item.href}">${item.name}</a></li>`;
+            return `<li><a href="/public/${item.href}">${item.name}</a></li>`;
         }).join('');
 
         searchWrapper.classList.add('show');
