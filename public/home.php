@@ -17,14 +17,14 @@
 <p>Rare Item drops will increase in an acending order for each difficulty level.</p>
 <h2>The Purpose of This Site</h2>
 <p>This page will keep you updated on the latest news surrounding our development, a wiki managed by us, in addition to hosting the games launcher.</p>
-<!-- <p>The game will be available early next year (2022).</p> -->
+<a href="https://www.github.com/LucasPFAva/The-Ruins" target="_blank">GitHub Page</a>
+
 <h2>Plans</h2>
 <h3>Release Date</h3>
-<p>The game is planned to release on:</p>
+<p>The game is planned to release in:</p>
 <div class="hover-ani">
     <p id="release-date">The Summer of 2022</p>
 </div>
-<a href="https://www.github.com/LucasPFAva/The-Ruins" target="_blank">GitHub Page</a>
 
 <h3>Planned Features</h3>
 <p>* A Campaign and Adventure mode (Unlocked after beating Campaign)</p>

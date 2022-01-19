@@ -21,7 +21,7 @@ document.getElementById('search').addEventListener('keyup', (e)=>{
 
     if (results.length) {
         let content = results.map((item)=>{
-            return `<li><a href="/public/${item.href}">${item.name}</a></li>`;
+            return `<li><a href="/${item.href}">${item.name}</a></li>`;
         }).join('');
 
         searchWrapper.classList.add('show');
@@ -29,4 +29,12 @@ document.getElementById('search').addEventListener('keyup', (e)=>{
     } else {
         searchWrapper.classList.remove('show');
     }
+});
+
+document.addEventListener('click',function(){
+    document.getElementById('results').style.display = 'none';
+});
+document.getElementById('search').addEventListener('click', function(event) {
+    event.stopPropagation();
+    document.getElementById('results').style.display = 'flex';
 });

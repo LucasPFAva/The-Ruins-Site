@@ -6,6 +6,35 @@
     {
         $username = $_SESSION['username'];
     }
+
+    if (count($_POST) > 0 && isset($_POST['token']) && isset($_SESSION['signuptoken']) && isset($_SESSION['logintoken']))
+    {
+        $User = new User();
+
+        if ($_SESSION['signuptoken'] == $_POST['token']) {
+            $SignupErrors = $User->create($_POST);
+            if (is_array($SignupErrors) && count($SignupErrors) == 0)
+            {
+                $LoginErrors = $User->login($_POST);
+                if (is_array($LoginErrors) && count($LoginErrors) == 0)
+                {
+                    header("Location: home");
+                    die;
+                }
+            }
+        }
+        if ($_SESSION['logintoken'] == $_POST['token']) {
+            $LoginErrors = $User->login($_POST);
+            if (is_array($LoginErrors) && count($LoginErrors) == 0)
+            {
+                header("Location: home");
+                die;
+            }
+        }
+    }
+
+    $_SESSION['signuptoken'] = 'signup'; // get_random_string(60);
+    $_SESSION['logintoken'] = 'login'; // get_random_string(60);
 ?>
 
 <!DOCTYPE html>
@@ -25,21 +54,6 @@
     <header>
         <nav>
             <div id="icon">The Ruins</div>
-            <!-- <div id="account-form">        # Search up a guide on how to make this properly.
-                <form action="" method="post">
-                    <section class="auth-header">
-                        <div id="icon">Login</div>
-                    </section>
-                    <section class="auth-content">
-                        <input type="email" name="email" id="email">
-                        <input type="password" name="password" id="password">
-                        <button type="submit">Login</button>
-                    </section>
-                    <section class="auth-footer">
-    
-                    </section>
-                </form>
-            </div> -->
             <ul id="menu">
                 <section class="mobile-header">
                     <div id="icon">The Ruins</div>
@@ -60,7 +74,7 @@
                     });
                 </script>
             </ul>
-            <form action="#">
+            <form id="searchbar" role="search">
                 <input type="search" id="search" class="search-data" placeholder="Search..." autocomplete="off" required>
                 <button type="submit" class="fas fa-search"></button>
                 <ul id="results">
@@ -71,10 +85,12 @@
             <div id="mobile">
                 <div class="search-icon"><span class="fas fa-search"></span></div>
                 <div class="menu-icon"><span class="fas fa-bars"></span></div>
-                <?php if ($username != ""): ?>
-                    <div class="username"><? htmlspecialchars($_SESSION['username'] ?></div>
-                <?php endif; ?>
-                <div class="user-icon"><a href="<?=base()?>account"><span class="fas fa-user"></span></a></div>
+                <section id="user">
+                    <div class="user-icon"><span class="fas fa-user"></span></div>
+                    <?php if ($username != ""): ?>
+                        <div id="username"><?=htmlspecialchars($_SESSION['username']) ?></div>
+                    <?php endif; ?>
+                </section>
                 <script>
                     $(".menu-icon").click(function (e) { 
                         e.preventDefault();
@@ -85,25 +101,68 @@
                     });
                     $(".search-icon").click(function (e) { 
                         e.preventDefault();
-                        if ($("nav form").hasClass("active"))
-                            $("nav form").removeClass("active");
+                        if ($("#searchbar").hasClass("active"))
+                            $("#searchbar").removeClass("active");
                         else
-                            $("nav form").addClass("active");
+                            $("#searchbar").addClass("active");
+                    });
+                    $(".user-icon").click(function (e) { 
+                        e.preventDefault();
+                        if ($("#authform").hasClass("active"))
+                            $("#authform").removeClass("active");
+                        else
+                            $("#authform").addClass("active");
                     });
                 </script>
             </div>
-            <!-- <form role="search">
-                <div class="wrapper">
-                    <input id="search" placeholder="search..." type="search" autocomplete="off">
-                    <button type="submit">
-                        <i class="fas fa-search"></i>
-                    </button>
-                    <ul id="results">
-
-                    </ul>
-                    <script src="<?=base()?>js/searchbar.js"></script>
-                </div>
-            </form> -->
+            <div id="authform">
+                <section id="error">
+                <?php
+                    if(isset($SignupErrors) && count($SignupErrors) > 0) {
+                        foreach ($SignupErrors as $SignupError) {
+                            echo $SignupError . "<br>";
+                        }
+                    }
+                    if(isset($LoginErrors) && count($LoginErrors) > 0) {
+                        foreach ($LoginErrors as $LoginError) {
+                            echo $LoginError . "<br>";
+                        }
+                    }
+                ?>
+                </section>
+                <form id="signupform" method="post">
+                    <div class="title">Signup</div>
+                    <input type="text" name="username" placeholder="Username" value="<?=isset($_POST['username']) ? $_POST['username'] : '';?>" required>
+                    <input type="email" name="email" placeholder="Email" value="<?=isset($_POST['email']) ? $_POST['email'] : '';?>" required>
+                    <input type="password" name="password" placeholder="Password" required>
+                    <input type="password" name="confirmpassword" placeholder="Repeat password" required>
+                    <input type="hidden" name="token" value="<?=$_SESSION['signuptoken']?>">
+                    <input type="submit" value="Signup">
+                    <div class="authtoggle">Have an account?</div>
+                </form>
+                <form class="active" id="loginform" method="post">
+                    <div class="title">Login</div>
+                    <input type="text" name="username" placeholder="Username or email" required>
+                    <input type="password" name="password" placeholder="Password" required>
+                    <input type="hidden" name="token" value="<?=$_SESSION['logintoken']?>">
+                    <input type="submit" value="Login">
+                    <div class="authtoggle">Don't have an account?</div>
+                </form>
+                <a id="logout" href="<?=base()?>logout.php">Logout</a>
+                <script>
+                    $(".authtoggle").click(function (e) { 
+                        e.preventDefault();
+                        if ($("#loginform").hasClass("active")) {
+                            $("#loginform").removeClass("active");
+                            $("#signupform").addClass("active");
+                        }
+                        else {
+                            $("#signupform").removeClass("active");
+                            $("#loginform").addClass("active");
+                        }
+                    });
+                </script>
+            </div>
         </nav>
     </header>
     <main>

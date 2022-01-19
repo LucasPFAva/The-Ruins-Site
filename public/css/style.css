@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;1,600&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 *{
     padding: 0;
@@ -14,7 +15,8 @@ body {
 nav {
     background: darkred;
 }
-nav form {
+#searchbar {
+    position: relative;
     display: flex;
     height: 40px;
     border-radius: 2px;
@@ -25,11 +27,11 @@ nav form {
     z-index: 1;
 }
 
-nav form.active {
+#searchbar.active {
     display: flex;
 }
 
-nav form .search-data {
+#searchbar .search-data {
     height: 100%;
     width: 100%;
     padding: 0 10px;
@@ -40,7 +42,7 @@ nav form .search-data {
     font-size: 17px;
 }
 
-nav form button {
+#searchbar button {
     padding: 0 15px;
     background: orangered;
     border: none;
@@ -67,14 +69,17 @@ img {
 }
 
 .hover-ani {
-    animation: hovering 2s ease-in-out infinite;
+    animation: hovering 2s infinite;
+    font-family: 'Press Start 2P', cursive;
 }
 @keyframes hovering {
-    0% {
-        transform: translatey(-1em);
+    0%, 100% {
+    transform: translateY(-0.25em);
+    color: red;
     }
-    100% {
-        transform: translate(1em);
+    50% {
+    transform: translateY(0.25em);
+    color: darkred;
     }
 }
 
@@ -84,20 +89,70 @@ img {
 
 nav .menu-icon,
 nav .search-icon,
-nav .user-icon,
 .cancel-icon {
     color: white;
     text-align: center;
     font-size: 2em;
     cursor: pointer;
-    display: none;
+    display: block;
 }
 nav .menu-icon span,
-nav .search-icon,
-nav .user-icon {
+nav .search-icon {
     display: none;
 }
+
+#user {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+}
+nav .user-icon {
+    font-size: 1.5em;
+}
+
+#results {
+    position: absolute;
+    background: darkred;
+    display: none;
+    top: 3em;
+    flex-direction: column;
+    width: 100%;
+    border-radius: 0.5em;
+}
+#results li {
+    list-style-type: none;
+    border-radius: 3px;
+    padding: 10px 15px;
+}
+#results li:hover {
+    color: red;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+}
+
+article {
+    max-width: 725px;
+}
+
+article > *,
+footer {
+    margin-top: 2rem;
+}
+
 @media (max-width: 1140px) {
+    article,
+    footer {
+        max-width: 90%;
+    }
     nav {
         padding: 0 50px;
     }
@@ -106,7 +161,7 @@ nav .user-icon {
     }
     nav #menu {
         position: fixed;
-        z-index: 1;
+        z-index: 2;
         top: 0;
         width: 16em;
         height: 100%;
@@ -126,100 +181,41 @@ nav .user-icon {
     nav #menu li a {
         font-size: 20px;
     }
-    nav form {
+    #searchbar {
         display: none;
+        position: absolute;
+        top: 58px;
+        left: 10vw;
+        right: 10vw;
+    }
+    #results {
+        left: 0;
+        width: 100%;
     }
     nav .menu-icon {
         display: block;
     }
     nav .search-icon,
     nav .menu-icon span,
-    nav .user-icon,
     .cancel-icon {
         display: block;
     }
-}
-
-@media (max-width: 603px) {
-    nav form {
-        position: absolute;
-        top: 0;
+    #authform {
         left: 0;
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 4vw;
     }
-}
-
-/* .wrapper {
-    margin: 0 auto;
-    background-color: #ffffff;
-    border-radius: 5px;
-    box-shadow: 0px 1px 5px 3px rgba(0,0,0,0.15);
-    position: relative;
-    width: 450px;
-}
-
-input {
-    width: 100%;
-    border: none;
-    height: 2em;
-    border-radius: 5px;
-    padding: 0px 40px 0px 10px;
-    font-size: 1em;
-    box-shadow: 0px 1px 4px rgba(0,0,0,0.1);
-}
-
-input:focus {
-    outline: none;
-}
-
-button {
-    position: absolute;
-    border: none;
-    background-color: none;
-    right: 0;
-    height: 2rem;
-    width: 3rem;
-}
-
-button i {
-    width: 100%;
-    color: #6d7b98;
-    font-size: 2em;
-}
-
-button:focus {
-    outline: none;
-} */
-
-#results {
-    padding: 0px;
-    position: absolute;
-    top: 3em;
-    width: 20em;
-    background: darkred;
-    border-radius: 2px;
-}
-
-#results {margin: 0; padding: 0;}
-#results li {
-    list-style-type: none;
-    border-radius: 3px;
-    opacity: 0;
-    display: none;
-    padding: 8px 12px;
-    transition: all .5s linear;
-}
-
-.show#results li {
-    opacity: 1;
-    display: block;
-}
-
-.show#results {
-    padding: 10px;
-}
-
-#results li:hover {
-    background-color: darkred;
+    #authform input {
+        font-size: 100%;
+    }
+    #authform #logout {
+        font-size: 100%;
+    }
+    footer {
+        margin-right: auto;
+        margin-left: auto;
+    }
 }
 
 nav {
@@ -265,40 +261,44 @@ nav #icon {
 #menu li {
     padding: 0 15px;
 }
-
-#account-form.active {
+#authform.active {
     display: flex;
 }
 
-#account-form {
-    display: none;
+#authform {
     flex-direction: column;
-    background: red;
-    width: 20em;
-    align-items: center;
+    position: absolute;
+    display: none;
+    right: 18px;
     z-index: 1;
+    top: 58px;
+    background: darkred;
+    width: min-content;
+    border-radius: 0.5em;
+    padding: 1em;
+    align-items: center;
+}
+#authform .title,
+#authform .authtoggle {
+    color: white;
 }
 
-li {
-    display: inline-block;
+#signupform,
+#loginform {
+    display: none;
 }
 
-main {
-    display: flex;
-    justify-content: center;
+#signupform.active,
+#loginform.active {
+    display: block;
 }
 
-footer {
-    display: flex;
-    justify-content: center;
+.authtoggle {
+    cursor: pointer;
 }
 
-article {
-    max-width: 725px;
-}
-
-article > * {
-    margin-top: 2rem;
+#authform #error {
+    color: red;
 }
 
 /* clears the 'X' in input[type="search"] from Chrome */
