@@ -62,8 +62,10 @@
                     </div>
                 </section>
                 <li class="menu-item"><a href="<?=base()?>">Home</a></li>
+                <li class="menu-item"><a href="<?=base()?>search">Search</a></li>
                 <li class="menu-item"><a href="<?=base()?>characters">Characters</a></li>
                 <li class="menu-item"><a href="<?=base()?>accessories">Accessories</a></li>
+                <li class="menu-item"><a href="<?=base()?>wiki">Wiki</a></li>
                 <script>
                     $(".cancel-icon").click(function (e) { 
                         e.preventDefault();

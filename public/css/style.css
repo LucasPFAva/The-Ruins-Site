@@ -52,6 +52,38 @@ nav {
     border-radius: 2px;
 }
 
+#filtersearchbar {
+    position: relative;
+    display: flex;
+    height: 40px;
+    border-radius: 2px;
+    padding: 2px;
+    background: red;
+    border: 1px solid rgba(155, 155, 155, 0.2);
+    z-index: 1;
+}
+
+#filtersearchbar .search-data {
+    height: 100%;
+    width: 100%;
+    padding: 0 10px;
+    color: white;
+    background: none;
+    border: none;
+    font-weight: 500;
+    font-size: 17px;
+}
+
+#filtersearchbar button {
+    padding: 0 15px;
+    background: orangered;
+    border: none;
+    cursor: pointer;
+    font-size: 17px;
+    color: white;
+    border-radius: 2px;
+}
+
 nav div#mobile {
     display: flex;
     justify-content: space-between;

@@ -1,40 +1,40 @@
-// Placeholder code for concept purposes.
+var typingTimer;              // Current time.
+var doneTypingInterval = 500; // Time in ms, 0.5 seconds.
+var elementsAdded = 0;        // Current element index.
 
-let searchable = [
-    {name: "Jester", href: "character/jester"},
-    {name: "Knight", href: "character/knight"},
-    {name: "Summoner", href: "character/summoner"},
-    {name: "Gunslinger", href: "character/gunslinger"},
-    {name: "Bard", href: "character/bard"}
-];
+$('#searchbar').submit(function (e) { 
+    e.preventDefault();
+    return window.location.href = '/search/' + document.getElementById('search').value.trim();
+});
 
-const searchWrapper = document.querySelector('#results');
-
-document.getElementById('search').addEventListener('keyup', (e)=>{
-    let results = [];
-    let input = e.target.value;
-    if (input.length) {
-        results = searchable.filter((item)=>{
-            return item.name.toLowerCase().includes(input.toLowerCase());
-        });
-    }
-
-    if (results.length) {
-        let content = results.map((item)=>{
-            return `<li><a href="/${item.href}">${item.name}</a></li>`;
-        }).join('');
-
-        searchWrapper.classList.add('show');
-        document.getElementById('results').innerHTML = content;
+document.getElementById('search').addEventListener("keyup", function(event) {
+    clearTimeout(typingTimer);
+    if (document.getElementById('search').value.replace(/\s/g, '').length > 0) { // Checks if the string has an actual letter and not only white spaces.
+        typingTimer = setTimeout(search(document.getElementById('search').value.trim()), doneTypingInterval);
     } else {
-        searchWrapper.classList.remove('show');
+        document.getElementById('results').innerHTML = '';
     }
 });
+
+function search (query) {
+    var searchData = query;
+
+    $.ajax({
+        type: "POST",
+        url: "/ajax.php",
+        data: {
+            search: searchData,
+            displaytype: 0
+        },
+        success: function(html) {
+            $("#results").html(html).show();
+        }
+    });
+}
 
 document.addEventListener('click',function(){
     document.getElementById('results').style.display = 'none';
 });
 document.getElementById('search').addEventListener('click', function(event) {
-    event.stopPropagation();
     document.getElementById('results').style.display = 'flex';
 });

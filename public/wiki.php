@@ -1,4 +1,4 @@
-<h1>This is the characters page.</h1>
+<h1>This is the Wiki page.</h1>
 <script>
     $(()=>{
         $.ajax({
@@ -6,8 +6,7 @@
             url: "/ajax.php",
             data: {
                 search: '',
-                displaytype: 1,
-                type: 0
+                displaytype: 1
             },
             success: function(html) {
                 $("#container tbody").html(html).show();
